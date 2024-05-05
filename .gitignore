@@ -17,3 +17,6 @@ application/logs/*
 !application/logs/.htaccess
 /vendor/
 /php/src/vendor/
+/php/src/application/cache/sessions/
+
+.idea
