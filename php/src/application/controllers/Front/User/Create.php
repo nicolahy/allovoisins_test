@@ -33,9 +33,13 @@ class Create extends CI_Controller {
             ];
 
             $this->db->insert('user', $data);
+            $insertId = $this->db->insert_id(); // Get the ID of the newly created user
             $this->session->set_flashdata('success', 'User created successfully');
+
+            redirect("Front/User/update/$insertId"); // Redirect to the update page
+        } else {
+            $this->create_form();
         }
-        $this->create_form();
     }
 
     public function setFormRules(): void
@@ -53,6 +57,10 @@ class Create extends CI_Controller {
     private function getViewVariables(): array
     {
         $professionalStatusOptions = array_map(static fn($case) => $case->value, ProfessionalStatus::cases());
-        return ['professionalStatusOptions' => $professionalStatusOptions];
+        return [
+            'professionalStatusOptions' => $professionalStatusOptions,
+            'action' => 'Front/User/create',
+            'text' => 'FO - Create User',
+        ];
     }
 }

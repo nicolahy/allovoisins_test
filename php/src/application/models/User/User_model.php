@@ -126,4 +126,10 @@ class User_model extends CI_Model {
         $this->db->where('last_login <', $date);
         return $this->db->delete('user');
     }
+
+    public function get_user($id)
+    {
+        $query = $this->db->get_where('user', ['id' => $id]);
+        return $query->row_array();
+    }
 }
