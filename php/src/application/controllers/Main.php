@@ -9,7 +9,7 @@ class Main extends CI_Controller {
 //    public function __construct()
 //    {
 //        parent::__construct();
-//        $this->load->model('User_model');
+//        $this->load->model('user/User_model');
 //    }
 
 	/**
@@ -30,7 +30,7 @@ class Main extends CI_Controller {
 	public function index(): void
     {
         $this->load->helper('url');
-        redirect('/Front/User/create', 'refresh');
+        redirect('/front/user/create', 'refresh');
 
 
 

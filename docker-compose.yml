@@ -10,7 +10,9 @@ services:
     volumes:
       - ./php/src:/var/www/html/
     ports:
-      - 7700:80
+      - "7700:80"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
   db:
     container_name: db-ci
     # image: mysql:5.7

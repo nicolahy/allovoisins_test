@@ -53,4 +53,4 @@ $route['default_controller'] = 'main';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['Front/User/update/(:num)'] = 'Front/User/update/index/$1';
+$route['front/user/update/(:num)'] = 'front/user/update/index/$1';

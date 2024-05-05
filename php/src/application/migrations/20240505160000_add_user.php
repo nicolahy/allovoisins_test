@@ -28,7 +28,7 @@ class Migration_add_user extends CI_Migration {
         $this->db->query($sql);
 
         // Load the User_model
-        $this->load->model('User/User_model');
+        $this->load->model('user/User_model');
 
         // Create a Faker instance
         $faker = Faker\Factory::create();

@@ -1,6 +1,6 @@
 <?php
 
-require APPPATH . '/models/Enum/ProfessionalStatus.php';
+require APPPATH . '/models/enum/ProfessionalStatus.php';
 
 class Migrate extends CI_Controller
 {

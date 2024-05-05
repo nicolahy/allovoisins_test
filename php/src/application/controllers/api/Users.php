@@ -43,7 +43,7 @@ class Users extends CI_Controller
     {
         $status = $data["status"];
         $message = $data["message"];
-        $this->output->set_status_header($status)->set_content_type('application/json', 'utf-8')->set_output(json_encode($message, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))->_display();
+        $this->output->set_status_header($status)->set_content_type('application/json', 'utf-8')->set_output(json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))->_display();
         exit;
     }
 
@@ -64,11 +64,19 @@ class Users extends CI_Controller
 
     public function create()
     {
-        $data = ['id' => $this->input->get('id'), 'name' => $this->input->get('name'), 'email' => $this->input->get('email')];
-        $this->db->insert('user', $data);
+        $userData = [
+            'firstName' => $this->input->post('firstName'),
+            'lastName' => $this->input->post('lastName'),
+            'email' => $this->input->post('email'),
+            'phoneNumber' => $this->input->post('phoneNumber'),
+            'postalAddress' => $this->input->post('postalAddress'),
+            'professionalStatus' => $this->input->post('professionalStatus')
+        ];
+        $this->db->insert('user', $userData);
         $messages = array('success' => 'Tuple created successfully');
         $data["status"] = 201;
         $data["message"] = $messages;
+        $data["user_id"] = $this->db->insert_id();
         return $this->respond($data);
     }
 
