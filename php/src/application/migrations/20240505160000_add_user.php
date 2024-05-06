@@ -1,10 +1,10 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') || exit('No direct script access allowed');
 require __DIR__ . '/../../vendor/autoload.php';
 
-class Migration_add_user extends CI_Migration {
-
+class Migration_add_user extends CI_Migration
+{
     public function up(): void
     {
         $professionalStatusValues = array_map(static fn($case) => $case->value, ProfessionalStatus::cases());
@@ -19,7 +19,7 @@ class Migration_add_user extends CI_Migration {
             `email` VARCHAR(100) NOT NULL,
             `phoneNumber` VARCHAR(100) NOT NULL,
             `postalAddress` VARCHAR(100) NOT NULL,
-            `professionalStatus` ENUM($professionalStatusEnum) NOT NULL,
+            `professionalStatus` ENUM({$professionalStatusEnum}) NOT NULL,
             `lastLogin` DATETIME NULL,
             PRIMARY KEY (`id`)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -34,8 +34,8 @@ class Migration_add_user extends CI_Migration {
         $faker = Faker\Factory::create();
 
         // Generate and insert 26 users
-        for ($i = 0; $i < 26; $i++) {
-            $user = array(
+        for ($i = 0; $i < 26; ++$i) {
+            $user = [
                 'firstName' => $faker->firstName(),
                 'lastName' => $faker->lastName(),
                 'email' => $faker->email(),
@@ -43,7 +43,7 @@ class Migration_add_user extends CI_Migration {
                 'postalAddress' => $faker->address(),
                 'professionalStatus' => $faker->randomElement($professionalStatusValues),
                 'lastLogin' => $faker->boolean() ? $faker->dateTimeThisYear()->format('Y-m-d H:i:s') : null,
-            );
+            ];
 
             $this->User_model->create_user($user);
         }

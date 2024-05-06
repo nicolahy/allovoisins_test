@@ -22,7 +22,7 @@ class Users extends CI_Controller
         $this->pagination->initialize($config);
 
         // Get the current page number from the URL
-        $page = ($this->uri->segment(4)) ? (int)$this->uri->segment(4) : 0;
+        $page = ($this->uri->segment(4)) ? (int) $this->uri->segment(4) : 0;
 
 
         // Calculate the offset based on the page number
@@ -30,34 +30,35 @@ class Users extends CI_Controller
 
         // Use limit and offset to get the records for the current page
         $this->db->limit($config['per_page'], $offset);
-        $users = $this->db->get("user")->result();
+        $users = $this->db->get('user')->result();
 
-        $data["status"] = 200;
-        $data["message"] = $users; // Set "message" to the list of users
-        $data["links"] = $this->pagination->create_links();
+        $data['status'] = 200;
+        $data['message'] = $users;
+// Set "message" to the list of users
+        $data['links'] = $this->pagination->create_links();
 
         return $this->respond($data);
     }
 
     public function respond($data)
     {
-        $status = $data["status"];
-        $message = $data["message"];
+        $status = $data['status'];
+        $message = $data['message'];
         $this->output->set_status_header($status)->set_content_type('application/json', 'utf-8')->set_output(json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))->_display();
         exit;
     }
 
     public function show($id = null)
     {
-        $tuples = $this->db->get_where("user", ['id' => $id])->row_array();
+        $tuples = $this->db->get_where('user', ['id' => $id])->row_array();
         if ($tuples) {
-            $data["status"] = 200;
-            $data["message"] = $tuples;
+            $data['status'] = 200;
+            $data['message'] = $tuples;
             return $this->respond($data);
         } else {
-            $messages = array('success' => 'No tuple found');
-            $data["status"] = 200;
-            $data["message"] = $messages;
+            $messages = ['success' => 'No tuple found'];
+            $data['status'] = 200;
+            $data['message'] = $messages;
             return $this->respond($data);
         }
     }
@@ -70,49 +71,52 @@ class Users extends CI_Controller
             'email' => $this->input->post('email'),
             'phoneNumber' => $this->input->post('phoneNumber'),
             'postalAddress' => $this->input->post('postalAddress'),
-            'professionalStatus' => $this->input->post('professionalStatus')
+            'professionalStatus' => $this->input->post('professionalStatus'),
         ];
         $this->db->insert('user', $userData);
-        $messages = array('success' => 'Tuple created successfully');
-        $data["status"] = 201;
-        $data["message"] = $messages;
-        $data["user_id"] = $this->db->insert_id();
+        $messages = ['success' => 'Tuple created successfully'];
+        $data['status'] = 201;
+        $data['message'] = $messages;
+        $data['user_id'] = $this->db->insert_id();
         return $this->respond($data);
     }
 
     public function update($id)
     {
-        $data = $data = $this->db->get_where("user", ['id' => $id])->row_array();
+        $data = $this->db->get_where('user', ['id' => $id])->row_array();
         if ($data) {
             $this->db->where('id', $id);
-            $data = ['name' => $this->input->get('name'), 'email' => $this->input->get('email')];
+            $data = [
+                'name' => $this->input->get('name'),
+                'email' => $this->input->get('email'),
+            ];
             $this->db->update('user', $data);
-            $messages = array('success' => 'Tuple updated successfully');
-            $data["status"] = 200;
-            $data["message"] = $messages;
+            $messages = ['success' => 'Tuple updated successfully'];
+            $data['status'] = 200;
+            $data['message'] = $messages;
             return $this->respond($data);
         } else {
-            $messages = array('success' => 'Tuple does not exist');
-            $data["status"] = 200;
-            $data["message"] = $messages;
+            $messages = ['success' => 'Tuple does not exist'];
+            $data['status'] = 200;
+            $data['message'] = $messages;
             return $this->respond($data);
         }
     }
 
     public function delete($id)
     {
-        $data = $this->db->get_where("user", ['id' => $id])->row_array();
+        $data = $this->db->get_where('user', ['id' => $id])->row_array();
         if ($data) {
             $this->db->where('id', $id);
             $this->db->delete('user');
-            $messages = array('success' => 'Tuple deleted successfully');
-            $data["status"] = 200;
-            $data["message"] = $messages;
+            $messages = ['success' => 'Tuple deleted successfully'];
+            $data['status'] = 200;
+            $data['message'] = $messages;
             return $this->respond($data);
         } else {
-            $messages = array('success' => 'Tuple does not exist');
-            $data["status"] = 200;
-            $data["message"] = $messages;
+            $messages = ['success' => 'Tuple does not exist'];
+            $data['status'] = 200;
+            $data['message'] = $messages;
             return $this->respond($data);
         }
     }
