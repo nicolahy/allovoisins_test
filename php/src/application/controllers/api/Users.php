@@ -101,7 +101,7 @@ class Users extends CI_Controller
 
     public function delete($id)
     {
-        $data = $data = $this->db->get_where("user", ['id' => $id])->row_array();
+        $data = $this->db->get_where("user", ['id' => $id])->row_array();
         if ($data) {
             $this->db->where('id', $id);
             $this->db->delete('user');

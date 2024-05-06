@@ -9,6 +9,7 @@ class UserList extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('user/User_model');
+        $this->load->library('session');
     }
 
     /**
@@ -28,27 +29,25 @@ class UserList extends CI_Controller {
      */
     public function index(): void
     {
-        $users = $this->getUsersData(base_url() . 'index.php/api/users/index');
-        print(__FILE__);var_dump($users);die();
-        $this->load->view('users', array('users' => $this->db->get('user')->result()));
+        $apiUrl = "http://host.docker.internal:7700/index.php/api/users/index"; // Replace with your API URL
+        $data = $this->callApi($apiUrl);
+        $this->load->view('admin/list', array('data' => $data));
     }
 
-
-    private function getUsersData(string $url)
+    private function callApi(string $url): array
     {
         $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_PROXYPORT, "7700"); // your proxy port number
-        curl_setopt($ch, CURLOPT_PROXY, $_SERVER['SERVER_ADDR'] . ':' .  $_SERVER['SERVER_PORT']);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
         $response = curl_exec($ch);
         if (!$response) {
             die('Error: "' . curl_error($ch) . '" - Code: ' . curl_errno($ch));
         }
+
+        curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
-        // Créez le sérialiseur
-        // Désérialisez la réponse JSON en objets User
-        return SerializerBuilder::create()->build()->deserialize($response, 'array<'. User_model::class .'>', 'json');
+        // Deserialize only the "message" content
+        return json_decode($response, true);
     }
 }

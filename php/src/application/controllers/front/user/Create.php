@@ -61,7 +61,7 @@ class Create extends CI_Controller {
             die('Error: "' . curl_error($ch) . '" - Code: ' . curl_errno($ch));
         }
 
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
         return json_decode($response, true);

@@ -7,5 +7,4 @@ RUN apt-get update && \
 		wget \
 		zip
 
-# Install Composer latest
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
