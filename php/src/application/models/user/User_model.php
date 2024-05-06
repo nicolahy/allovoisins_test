@@ -18,9 +18,6 @@ class User_model extends CI_Model
 
     public string $professionalStatus = '';
 
-    /**
-     * @jms\Serializer\Annotation\Type("DateTime<'Y-m-d\TH:i:sP'>")
-     */
     public ?DateTime $lastLogin = null;
 
     public function __construct()

@@ -1,8 +1,6 @@
 <?php
 
-defined('BASEPATH') || exit('No direct script access allowed');
-use JMS\Serializer\SerializerBuilder;
-require __DIR__ . '/../../../vendor/autoload.php';class UserList extends CI_Controller
+class UserList extends CI_Controller
 {
     public function __construct()
     {
@@ -11,27 +9,10 @@ require __DIR__ . '/../../../vendor/autoload.php';class UserList extends CI_Cont
         $this->load->library('session');
     }
 
-    /**
-     * Index Page for this controller.
-     *
-     * Maps to the following URL
-     *      http://example.com/index.php/welcome
-     *  - or -
-     *      http://example.com/index.php/welcome/index
-     *  - or -
-     * Since this controller is set as the default controller in
-     * config/routes.php, it's displayed at http://example.com/
-     *
-     * So any other public methods not prefixed with an underscore will
-     * map to /index.php/welcome/<method_name>
-     *
-     * @see https://codeigniter.com/userguide3/general/urls.html
-     */
     public function index(): void
     {
         $apiUrl = 'http://host.docker.internal:7700/index.php/api/users/index';
 
-// Replace with your API URL
         $data = $this->callApi($apiUrl);
         $this->load->view('admin/list', ['data' => $data]);
     }
@@ -47,7 +28,6 @@ require __DIR__ . '/../../../vendor/autoload.php';class UserList extends CI_Cont
 
         curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
-// end if
         return json_decode($response, true);
     }
 }

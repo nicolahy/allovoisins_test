@@ -14,33 +14,26 @@ class Users extends CI_Controller
         // Load the pagination library
         $this->load->library('pagination');
 
-        // Configure the pagination options
         $config['base_url'] = base_url() . 'users/index';
         $config['total_rows'] = $this->db->count_all('user');
         $config['per_page'] = 25;
 
         $this->pagination->initialize($config);
 
-        // Get the current page number from the URL
-        $page = ($this->uri->segment(4)) ? (int) $this->uri->segment(4) : 0;
+        $page = ($this->uri->segment(4)) ? (int)$this->uri->segment(4) : 0;
 
-
-        // Calculate the offset based on the page number
         $offset = ($page > 0) ? (($page - 1) * $config['per_page']) : 0;
-
-        // Use limit and offset to get the records for the current page
         $this->db->limit($config['per_page'], $offset);
         $users = $this->db->get('user')->result();
 
         $data['status'] = 200;
         $data['message'] = $users;
-// Set "message" to the list of users
         $data['links'] = $this->pagination->create_links();
 
         return $this->respond($data);
     }
 
-    public function respond($data)
+    public function respond($data): void
     {
         $status = $data['status'];
         $message = $data['message'];

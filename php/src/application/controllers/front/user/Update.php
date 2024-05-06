@@ -1,7 +1,6 @@
 <?php
 
 defined('BASEPATH') || exit('No direct script access allowed');
-require __DIR__ . '/../../../../vendor/autoload.php';
 require APPPATH . '/models/enum/ProfessionalStatus.php';class Update extends CI_Controller
 {
     public function __construct()
@@ -16,7 +15,6 @@ require APPPATH . '/models/enum/ProfessionalStatus.php';class Update extends CI_
         $this->load->helper('form');
         $user = $this->User_model->get_user($id);
 
-// Get the user from the database
         $this->load->view('front/user/update', $this->getViewVariables($user));
     }
 

@@ -1,8 +1,10 @@
 <?php
 
 defined('BASEPATH') || exit('No direct script access allowed');
-require __DIR__ . '/../../../../vendor/autoload.php';
-require APPPATH . '/models/enum/ProfessionalStatus.php';class Create extends CI_Controller
+
+require APPPATH . '/models/enum/ProfessionalStatus.php';
+
+class Create extends CI_Controller
 {
     public function __construct()
     {
@@ -32,15 +34,11 @@ require APPPATH . '/models/enum/ProfessionalStatus.php';class Create extends CI_
             ];
             $apiUrl = 'http://host.docker.internal:7700/index.php/api/users/create';
 
-        // Replace with your API URL
             $response = $this->callApi($apiUrl, $data);
             if (201 === $response['status']) {
                 $this->session->set_flashdata('success', 'User created successfully');
                 redirect('front/user/update/' . $response['user_id']);
-
-    // Redirect to the update page
             } else {
-    // Handle API error here
                 $this->session->set_flashdata('error', 'Failed to create user');
             }
         }
@@ -51,7 +49,6 @@ require APPPATH . '/models/enum/ProfessionalStatus.php';class Create extends CI_
     private function callApi(string $url, array $data): array
     {
         $ch = curl_init($url);
-// end if
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
