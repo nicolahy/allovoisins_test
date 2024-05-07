@@ -19,6 +19,14 @@ defined('BASEPATH') || exit('No direct script access allowed');
         <?= $text ?? '' ?>
     </h4>
     <?php require '_form.php'; ?>
+
+    <div class="col-12">
+        <p class="text-center">
+            <a href="<?php echo base_url(); ?>index.php/front/user/create">Accueil</a>
+            -
+            <a href="<?php echo base_url(); ?>index.php/admin/UserList">Liste des utilisateurs</a>
+        </p>
+    </div>
 </body>
 
 </html>

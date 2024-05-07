@@ -46,10 +46,4 @@
     <?php echo form_submit('submit', 'Submit', ["class" => "btn btn-primary mt-3"]); ?>
 </div>
 
-<div class="col-12">
-    <p class="text-center">
-        <a href="<?php echo base_url(); ?>index.php/front/user/create">Accueil</a>
-    </p>
-</div>
-
 <?php echo form_close(); ?>
