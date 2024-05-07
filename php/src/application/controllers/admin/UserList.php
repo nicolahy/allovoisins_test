@@ -35,14 +35,15 @@ class UserList extends CI_Controller
 
         $offset = ($page > 0) ? (($page - 1) * $config['per_page']) : 0;
 
+        $apiUrl = 'http://host.docker.internal:7700/index.php/api/users/index/' . $offset . '/' . $config['per_page'];
+
         $data = $this->callApi($apiUrl);
         $this->load->view('admin/list', ['data' => $data]);
     }
 
-    private function callApi(int $offset, int $limit): array
+    private function callApi($apiUrl): array
     {
         // Add the offset and limit to the API URL
-        $apiUrl = 'http://host.docker.internal:7700/index.php/api/users/index/' . $offset . '/' . $limit;
 
         $ch = curl_init($apiUrl);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

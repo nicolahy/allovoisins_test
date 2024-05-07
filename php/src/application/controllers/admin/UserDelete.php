@@ -16,7 +16,7 @@ class UserDelete extends CI_Controller
         $response = $this->callApi($apiUrl);
         if (200 === $response['status']) {
             $this->session->set_flashdata('success', 'User deleted successfully');
-            redirect('admin/UserList/');
+            redirect('admin/UserList');
         } else {
             $this->session->set_flashdata('error', 'Failed to delete user');
         }
