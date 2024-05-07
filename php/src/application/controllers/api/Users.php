@@ -14,16 +14,18 @@ class Users extends CI_Controller
         // Load the pagination library
         $this->load->library('pagination');
 
-        $config['base_url'] = base_url() . 'users/index';
-        $config['total_rows'] = $this->db->count_all('user');
-        $config['per_page'] = 25;
+        $page = ($this->uri->segment(4)) ? (int)$this->uri->segment(4) : 1;
+        $offset = ($page > 1) ? (($page - 1) * 25) : 0;
+
+        $config['base_url'] = base_url() . 'index.php/admin/UserList/';
+        $config ['total_rows'] = $this->db->count_all('user');
+        $config ['uri_segment'] = 4;
+        $config ['per_page'] = 25;
+        $config ['num_links'] = 10;
 
         $this->pagination->initialize($config);
 
-        $page = ($this->uri->segment(4)) ? (int)$this->uri->segment(4) : 0;
-
-//        $offset = ($page > 0) ? (($page - 1) * $config['per_page']) : 0;
-        $this->db->limit($config['per_page'], $page);
+        $this->db->limit($config['per_page'], $offset);
         $users = $this->db->get('user')->result();
 
         $data['status'] = 200;
