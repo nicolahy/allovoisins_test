@@ -16,7 +16,7 @@ class Create extends CI_Controller
     public function create_form(): void
     {
         $this->load->helper('form');
-        $this->load->view('front/user/create', $this->getViewVariables());
+        $this->load->view('front/user/edit', $this->getViewVariables());
     }
 
     public function index(): void
@@ -70,7 +70,8 @@ class Create extends CI_Controller
 
     private function getViewVariables(): array
     {
-        $professionalStatusOptions = array_map(static fn($case) => $case->value, ProfessionalStatus::cases());
+        $professionalStatusOptions = array_combine($values = array_map(static fn($case) => $case->value, ProfessionalStatus::cases()), $values);
+
         return [
             'professionalStatusOptions' => $professionalStatusOptions,
             'action' => 'front/user/create',

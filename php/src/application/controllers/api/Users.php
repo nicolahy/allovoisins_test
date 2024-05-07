@@ -22,8 +22,8 @@ class Users extends CI_Controller
 
         $page = ($this->uri->segment(4)) ? (int)$this->uri->segment(4) : 0;
 
-        $offset = ($page > 0) ? (($page - 1) * $config['per_page']) : 0;
-        $this->db->limit($config['per_page'], $offset);
+//        $offset = ($page > 0) ? (($page - 1) * $config['per_page']) : 0;
+        $this->db->limit($config['per_page'], $page);
         $users = $this->db->get('user')->result();
 
         $data['status'] = 200;

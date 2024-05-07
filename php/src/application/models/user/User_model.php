@@ -26,11 +26,11 @@ class User_model extends CI_Model
         $this->load->database();
     }
 
-    public function get_users($page, $size)
+    public function get_users($page, $segment)
     {
-        $this->db->limit($size, ($page - 1) * $size);
-        $query = $this->db->get('user');
-        return $query->result_array();
+        $this->db->select();
+        $this->db->limit($page, $segment);
+        return $this->db->get('user')->result();
     }
 
     public function create_user($user)

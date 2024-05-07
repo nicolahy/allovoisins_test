@@ -15,7 +15,7 @@ require APPPATH . '/models/enum/ProfessionalStatus.php';class Update extends CI_
         $this->load->helper('form');
         $user = $this->User_model->get_user($id);
 
-        $this->load->view('front/user/update', $this->getViewVariables($user));
+        $this->load->view('front/user/edit', $this->getViewVariables($user));
     }
 
     public function index($id): void
@@ -46,7 +46,8 @@ require APPPATH . '/models/enum/ProfessionalStatus.php';class Update extends CI_
 
     private function getViewVariables($user): array
     {
-        $professionalStatusOptions = array_map(static fn($case) => $case->value, ProfessionalStatus::cases());
+        $professionalStatusOptions = array_combine($values = array_map(static fn($case) => $case->value, ProfessionalStatus::cases()), $values);
+
         return [
 
             'user' => $user,

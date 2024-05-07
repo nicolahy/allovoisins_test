@@ -1,7 +1,4 @@
-<!-- user_form.php -->
-<?php
-defined('BASEPATH') or exit('No direct script access allowed');
-?>
+<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 
 <?php if (validation_errors()) : ?>
     <div class="alert alert-danger" role="alert">
@@ -42,11 +39,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 <div class="col-12">
     <?php echo form_label('Professional Status', 'professionalStatus', ["class" => "form-label"]); ?>
-    <?php echo form_dropdown('professionalStatus', $professionalStatusOptions ?? [], set_value('professionalStatus', $user['professionalStatus'] ?? ''), ["class" => "form-select", "required" => true]); ?>
+    <?php echo form_dropdown('professionalStatus', $professionalStatusOptions ?? [], $user['professionalStatus'] ?? '', ["class" => "form-select", "required" => true]); ?>
 </div>
 
 <div class="col-12">
     <?php echo form_submit('submit', 'Submit', ["class" => "btn btn-primary mt-3"]); ?>
+</div>
+
+<div class="col-12">
+    <p class="text-center">
+        <a href="<?php echo base_url(); ?>index.php/front/user/create">Accueil</a>
+    </p>
 </div>
 
 <?php echo form_close(); ?>

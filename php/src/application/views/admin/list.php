@@ -60,6 +60,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <?php endforeach; ?>
             </tbody>
         </table>
+    <?= $data['links'] ?>
     <?php endif; ?>
 </div>
 

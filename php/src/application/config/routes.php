@@ -55,3 +55,5 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['front/user/update/(:num)'] = 'front/user/update/index/$1';
 $route['admin/userdelete/(:num)'] = 'admin/userdelete/index/$1';
+
+
