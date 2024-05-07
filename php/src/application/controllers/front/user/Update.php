@@ -31,11 +31,38 @@ require APPPATH . '/models/enum/ProfessionalStatus.php';class Update extends CI_
                 'postalAddress' => $this->input->post('postalAddress'),
                 'professionalStatus' => $this->input->post('professionalStatus'),
             ];
-            $this->db->update('user', $data);
+
+            $apiUrl = 'http://host.docker.internal:7700/index.php/api/users/update/' . $id;
+
+            $response = $this->callApi($apiUrl, $data);
+            if (201 === $response['status']) {
+                $this->session->set_flashdata('success', 'User created successfully');
+                redirect('front/user/update/' . $response['user_id']);
+            } else {
+                $this->session->set_flashdata('error', 'Failed to create user');
+            }
+
+
             $this->session->set_flashdata('success', 'User updated successfully');
         }
 
         $this->create_form($id);
+    }
+
+    private function callApi(string $url, array $data): array
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        $response = curl_exec($ch);
+        if (!$response) {
+            die('Error: "' . curl_error($ch) . '" - Code: ' . curl_errno($ch));
+        }
+
+        curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        return json_decode($response, true);
     }
 
     public function setFormRules(): void

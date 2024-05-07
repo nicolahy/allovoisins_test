@@ -65,7 +65,13 @@ class Create extends CI_Controller
     public function setFormRules(): void
     {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('firstName', 'First Name', 'trim|required')->set_rules('lastName', 'Last Name', 'trim|required')->set_rules('email', 'Email', 'trim|required|valid_email')->set_rules('phoneNumber', 'Phone Number', 'trim|required')->set_rules('postalAddress', 'Postal Address', 'trim|required')->set_rules('professionalStatus', 'Professional Status', 'trim|required');
+        $this->form_validation
+            ->set_rules('firstName', 'First Name', 'trim|required')
+            ->set_rules('lastName', 'Last Name', 'trim|required')
+            ->set_rules('email', 'Email', 'trim|required|valid_email')
+            ->set_rules('phoneNumber', 'Phone Number', 'trim|required')
+            ->set_rules('postalAddress', 'Postal Address', 'trim|required')
+            ->set_rules('professionalStatus', 'Professional Status', 'trim|required');
     }
 
     private function getViewVariables(): array

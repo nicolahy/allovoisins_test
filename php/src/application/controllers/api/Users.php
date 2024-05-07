@@ -79,11 +79,15 @@ class Users extends CI_Controller
         $data = $this->db->get_where('user', ['id' => $id])->row_array();
         if ($data) {
             $this->db->where('id', $id);
-            $data = [
-                'name' => $this->input->get('name'),
-                'email' => $this->input->get('email'),
+            $userData = [
+                'firstName' => $this->input->post('firstName'),
+                'lastName' => $this->input->post('lastName'),
+                'email' => $this->input->post('email'),
+                'phoneNumber' => $this->input->post('phoneNumber'),
+                'postalAddress' => $this->input->post('postalAddress'),
+                'professionalStatus' => $this->input->post('professionalStatus'),
             ];
-            $this->db->update('user', $data);
+            $this->db->update('user', $userData);
             $messages = ['success' => 'Tuple updated successfully'];
             $data['status'] = 200;
             $data['message'] = $messages;
