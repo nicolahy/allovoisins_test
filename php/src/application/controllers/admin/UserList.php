@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') || exit('No direct script access allowed');
 
 class UserList extends CI_Controller
 {
@@ -11,14 +12,9 @@ class UserList extends CI_Controller
 
     public function index($offset = null): void
     {
-//        $page = ($this->uri->segment(3)) ? (int)$this->uri->segment(3) : 0;
         $page = ($this->uri->segment(3)) ? (int)$this->uri->segment(3) : 1;
-        $offset = (0 !== $offset && $page > 0) ? (($page - 1) * 25) : 0;
 
         $apiUrl = 'http://host.docker.internal:7700/index.php/api/users/index/' . $page;
-
-//        print(__FILE__);var_dump($apiUrl);die();
-
         $data = $this->callApi($apiUrl);
         $this->load->view('admin/list', ['data' => $data]);
     }

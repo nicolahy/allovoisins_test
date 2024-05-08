@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') || exit('No direct script access allowed');
 
 class UserDelete extends CI_Controller
 {
@@ -12,8 +13,8 @@ class UserDelete extends CI_Controller
     public function index($id): void
     {
         $apiUrl = 'http://host.docker.internal:7700/index.php/api/users/delete/' . $id;
-
         $response = $this->callApi($apiUrl);
+
         if (200 === $response['status']) {
             $this->session->set_flashdata('success', 'User deleted successfully');
             redirect('admin/UserList');
