@@ -50,10 +50,9 @@ class User_model extends CI_Model
         return $this->db->delete('user');
     }
 
-    public function delete_inactive_users($months)
+    public function deleteInactiveUsers()
     {
-        $date = date('Y-m-d H:i:s', strtotime(sprintf('-%s months', $months)));
-        $this->db->where('last_login <', $date);
+        $this->db->where('lastLogin < DATE_SUB(NOW(), INTERVAL 36 MONTH)');
         return $this->db->delete('user');
     }
 
