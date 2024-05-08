@@ -5,8 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <html lang="en">
 
 <head>
-
-    <link rel="stylesheet" href="<?php base_url(); ?>../../assets/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/bootstrap.min.css">
     <title>Allovoisins - TEST</title>
 </head>
 

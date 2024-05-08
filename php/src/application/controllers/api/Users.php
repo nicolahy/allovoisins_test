@@ -22,6 +22,7 @@ class Users extends CI_Controller
         $config ['uri_segment'] = 4;
         $config ['per_page'] = 25;
         $config ['num_links'] = 10;
+        $config['use_page_numbers'] = TRUE;
 
         $this->pagination->initialize($config);
 
