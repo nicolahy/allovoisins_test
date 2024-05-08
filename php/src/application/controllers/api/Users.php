@@ -31,16 +31,16 @@ class Users extends CI_Controller
         $config['num_links'] = 10;
         $config['use_page_numbers'] = TRUE;
 
-        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_open'] = '<ul class="pagination justify-content-center">';
         $config['full_tag_close'] = '</ul>';
-        $config['first_link'] = 'First';
-        $config['last_link'] = 'Last';
+        $config['first_link'] = 'Début';
+        $config['last_link'] = 'Fin';
         $config['first_tag_open'] = '<li class="page-item"><span class="page-link">';
         $config['first_tag_close'] = '</span></li>';
-        $config['prev_link'] = '&laquo';
+        $config['prev_link'] = 'Précédent';
         $config['prev_tag_open'] = '<li class="page-item"><span class="page-link">';
         $config['prev_tag_close'] = '</span></li>';
-        $config['next_link'] = '&raquo';
+        $config['next_link'] = 'Suivant';
         $config['next_tag_open'] = '<li class="page-item"><span class="page-link">';
         $config['next_tag_close'] = '</span></li>';
         $config['last_tag_open'] = '<li class="page-item"><span class="page-link">';
